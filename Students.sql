@@ -1,0 +1,64 @@
+-- #1 Find all the students that have Foster as their teacher
+-- SELECT s_name
+-- FROM Students 
+--     INNER JOIN StudentTeacher ON Students.s_id = StudentTeacher.student_id
+--     INNER JOIN Teachers ON StudentTeacher.teacher_id = Teachers.t_id
+--     WHERE Teachers.t_name="Foster";
+-- #2 Find all of Ryan's teachers
+-- SELECT t_name
+-- FROM Teachers
+--     INNER JOIN StudentTeacher ON Teachers.t_id = StudentTeacher.teacher_id
+--     INNER JOIN Students ON StudentTeacher.student_id = Students.s_id
+--     WHERE Students.s_name="Ryan";
+-- #3 Find all of Leo's tenured teachers
+-- SELECT t_name,isTenured
+-- FROM Teachers
+--     INNER JOIN StudentTeacher ON Teachers.t_id = StudentTeacher.teacher_id
+--     INNER JOIN Students ON StudentTeacher.student_id = Students.s_id
+--     WHERE Students.s_name="Leo" AND Teachers.isTenured=1;
+-- 4 Find all of Levine's brilliant students
+    -- SELECT s_name, isBrilliant
+    -- FROM Students
+    -- INNER JOIN StudentTeacher ON StudentTeacher.student_id = Students.s_id
+    -- INNER JOIN Teachers ON Teachers.t_id = StudentTeacher.teacher_id
+    -- WHERE Teachers.t_name="Levine" AND Students.isBrilliant=1;
+-----------------------CREATING----------------------------
+-- INSERT INTO StudentTeacher
+-- VALUES (1, 1);
+-- INSERT INTO StudentTeacher
+-- VALUES (1, 2);
+-- INSERT INTO StudentTeacher
+-- VALUES (2, 1);
+-- INSERT INTO StudentTeacher
+-- VALUES (2, 2);
+-- INSERT INTO StudentTeacher
+-- VALUES (2, 3);
+-- INSERT INTO StudentTeacher
+-- VALUES (3, 1);
+-- INSERT INTO Students (s_name,isBrilliant) 
+-- VALUES ('Ryan', 1);
+-- INSERT INTO Students (s_name,isBrilliant) VALUES ('Leo', 1);
+-- INSERT INTO Students (s_name,isBrilliant) VALUES ('Ernie', 0);
+
+-- INSERT INTO Teachers (t_name,isTenured) VALUES ('Levine', 1);
+-- INSERT INTO Teachers (t_name,isTenured) VALUES ('Foster', 0);
+-- INSERT INTO Teachers (t_name,isTenured) VALUES ( 'Schwimmer', 0);
+
+-- CREATE TABLE Students(
+--   s_id INT NOT NULL AUTO_INCREMENT,
+--   s_name VARCHAR(20),
+--   isBrilliant BOOLEAN,
+--   PRIMARY KEY ( s_id ) 
+-- );
+-- CREATE TABLE Teachers(
+--   t_id INT NOT NULL AUTO_INCREMENT,
+--   t_name VARCHAR(20),
+--   isTenured BOOLEAN,
+--   PRIMARY KEY ( t_id ) 
+-- );
+-- CREATE TABLE StudentTeacher(
+--   student_id INT,
+--   teacher_id INT,
+--   FOREIGN KEY (student_id) REFERENCES Students(s_id),
+--   FOREIGN KEY (teacher_id) REFERENCES Teachers(t_id)
+-- );
