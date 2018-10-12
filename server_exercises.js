@@ -48,7 +48,7 @@ const sequelize = new Sequelize('mysql://sql7260491:77E6J8Rgwr@sql7.freesqldatab
     // })
        
     const addRelationship = async function () {
-        let actor = await Actor.create({ a_name: "Jeremy Irons" })
+        let actor = await Actor.find({  where:{id:4} })
         let movie = await Movie.find({ where:{id:5} })
         actor.addMovie(movie)
 
@@ -69,7 +69,7 @@ const sequelize = new Sequelize('mysql://sql7260491:77E6J8Rgwr@sql7.freesqldatab
         // });
         // alternatively, could also do artist.addMovie(movie)
     }
-    addRelationship()
+    // addRelationship()
    
     
     //#3 Find all the movies directed by Peter Jackson
@@ -83,12 +83,14 @@ const sequelize = new Sequelize('mysql://sql7260491:77E6J8Rgwr@sql7.freesqldatab
     //         console.log(movie.dataValues.m_name) 
     //     }));
     //#4 Find all the movies in which Ian McKellen played
-    // Movie.find({
-    //     // include: [Movie],
-    //     where: {actorId: 7 }
-    //   })
-    //   .then(results => 
-    //    console.log(results));
+    Actor.find({
+        include: [Movie],
+        where: {a_name: "Ian McKellen" }
+      })
+      .then(results => 
+            results.movies.forEach(movie => {
+                console.log(movie.dataValues.m_name) 
+            }));
        
 
    
