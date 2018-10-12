@@ -48,13 +48,25 @@ const sequelize = new Sequelize('mysql://sql7260491:77E6J8Rgwr@sql7.freesqldatab
     // })
        
     const addRelationship = async function () {
-        let movie = await Movie.create({ m_name: "Lion King", directorId: 1})
         let actor = await Actor.create({ a_name: "Jeremy Irons" })
-        movie.addActor(actor)
-        Director.find({
-        where: { id: 2 },
-        include: [Movie]
-    })
+        let movie = await Movie.find({ where:{id:5} })
+        actor.addMovie(movie)
+
+        // Movie.create({
+        //     m_name: "Lord of the Lions", 
+        //     directorId: 2
+        // }).then(s => {
+        //     Actor.create({
+        //         a_name: "Ian McKellen"
+        //     }).then(c => {
+        //         s.addActor(c)
+        //     })
+        // })
+        // Movie.findById(3).then(movie=>{
+        //     ledger.setCoins([1,2]).then(sc=>{
+        //         console.log(sc);
+        //     });
+        // });
         // alternatively, could also do artist.addMovie(movie)
     }
     addRelationship()
